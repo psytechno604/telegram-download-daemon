@@ -1,6 +1,7 @@
 FROM python:3.6
 
 COPY *.py /
+COPY tdd.sh /
 
 RUN echo $TARGETPLATFORM
 
@@ -13,4 +14,6 @@ RUN if [ "$TARGETPLATFORM" = "linux/arm/v7" ]; then \
     pip install telethon cryptg; \
   fi
 
-CMD [ "python", "./telegram-download-daemon.py" ]
+RUN chmod +x /tdd.sh
+
+CMD [ "/tdd.sh" ]
