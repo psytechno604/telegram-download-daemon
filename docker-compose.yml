@@ -1,16 +1,17 @@
 version: '3.5'
 
 services:
-  telegram-download-daemon:
-    build: .
-    image: telegram-download-daemon:latest
+  tdd:
+    image: ${DOCKERHUB_USER}/tdd:${TDD_TAG}
     environment:
       TELEGRAM_DAEMON_API_ID: "${API_ID}"
       TELEGRAM_DAEMON_API_HASH: "${API_HASH}"
-      TELEGRAM_DAEMON_CHANNEL: "${DL_CHANNEL_ID}"
+      TELEGRAM_DAEMON_CHANNEL: "${TELEGRAM_DAEMON_CHANNEL}"
       TELEGRAM_DAEMON_DEST: "/downloads"
+      TELEGRAM_DAEMON_TEMP: "/tmp"
       TELEGRAM_DAEMON_SESSION_PATH: "/session"
     volumes:
-       - ${TDD_DEST}:/downloads
-       - ${TDD_HOME}:/session
+       - ${HOST_TELEGRAM_DAEMON_SESSION_PATH}:/session
+       - ${HOST_TELEGRAM_DAEMON_DEST}:/downloads
+       - ${HOST_TELEGRAM_DAEMON_TEMP}:/tmp
     restart: unless-stopped
