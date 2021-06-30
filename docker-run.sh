@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker run --env-file .env -v /home/sergey/Code/tgplay/tdd:/session -v /home/sergey/Code/tgplay/dest:/dest -v /home/sergey/Code/tgplay/temp:/temp --memory 256m tdd
+docker run --env-file .env.vps -v /usr/tgplay/tdd:/session -v /usr/tgplay/dest:/dest -v /usr/tgplay/temp:/temp -ti tdd bash
